@@ -7,15 +7,15 @@ const Player = ({ selectedCategory, selectedMovie }) => {
         <>
             <div>
                 <h1>Video Player</h1>
-                <h2>{ `${selectedCategory.name}, ${ selectedMovie.title }` } </h2>
+                <h2>{ `${ selectedCategory }, ${ selectedMovie }` } </h2>
             </div>
         </>
      );
 }
 
 const mapStateToProps = (store) => ({
-    selectedCategory: store.MovieReducer.selectedCategory,
-    selectedMovie: store.MovieReducer.selectedMovie,
+    selectedCategory: store.movie.selectedCategory,
+    selectedMovie: store.movie.selectedMovie,
 });
 
 export default connect(mapStateToProps)(Player);

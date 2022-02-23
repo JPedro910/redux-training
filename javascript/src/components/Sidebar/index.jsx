@@ -2,8 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { Creators as MoviesActions } from "../../store/ducks/movie";
+import { bindActionCreators } from "redux";
 
 const Sidebar = ({ categories, selectMovie }) => {
+
     return ( 
         <>
             <aside>
@@ -28,11 +30,9 @@ const Sidebar = ({ categories, selectMovie }) => {
 }
 
 const mapStateToProps = (store) => ({
-    categories: store.MovieReducer.categories
+    categories: store.movie.categories
 });
 
-const mapDispatchToProps = (dispatch) => ({
-    selectMovie: (category, movie) => dispatch(MoviesActions.selectMovie(category, movie))
-})
+const mapDispatchToProps = (dispatch) => bindActionCreators(MoviesActions, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

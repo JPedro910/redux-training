@@ -1,37 +1,22 @@
+import { createActions, createReducer } from "reduxsauce"; 
 import api from "../../services/api";
 
 const categories = api;
 
-export const Types = {
-    SELECT: "movie/SELECT"
-}
+export const { Types, Creators } = createActions({
+    selectMovie: ["category", "movie"]
+});
 
 const INITIAL_STATE = {
     categories: [...categories],
-    selectedCategory: { name: "Categoria" },
-    selectedMovie: { title: "Título do Filme" },
+    selectedCategory: "Categoria",
+    selectedMovie: "Título do Filme",
 }
 
-export const MovieReducer = (state = INITIAL_STATE, action) => {
-
-    switch(action.type){
-        
-        case Types.SELECT:
-            return {
-                ...state,
-                selectedMovie: action.movie,
-                selectedCategory: action.category
-            }
-
-        default: 
-            return state;
-    } 
-};
-
-export const Creators = {
-    selectMovie: (category, movie) => ({
-        type: Types.SELECT,
-        category: category,
-        movie: movie
+export default createReducer(INITIAL_STATE, {
+    [Types.SELECT_MOVIE]: (state, action) => ({
+        ...state,
+        selectedCategory: action.category.name,
+        selectedMovie: action.movie.title
     })
-}
+});
