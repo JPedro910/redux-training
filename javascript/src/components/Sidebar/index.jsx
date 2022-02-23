@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import SelectMovieAction from "../../redux/actions/SelectMovieAction";
+import { Creators as MoviesActions } from "../../store/ducks/movie";
 
 const Sidebar = ({ categories, selectMovie }) => {
     return ( 
@@ -32,7 +32,7 @@ const mapStateToProps = (store) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    selectMovie: (category, movie) => dispatch(SelectMovieAction(category, movie))
+    selectMovie: (category, movie) => dispatch(MoviesActions.selectMovie(category, movie))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
