@@ -1,10 +1,17 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { useEffect } from "react";
+import { connect, useDispatch } from "react-redux";
 
-import { MoviesActions } from "../../store/ducks/movie";
+import { MovieActions } from "../../store/ducks/movie";
 import { bindActionCreators } from "redux";
 
+import { getMovies } from "../../store/fetchActions/movie";
+
 const Sidebar = ({ categories, selectMovie }) => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getMovies());
+    }, [dispatch]);
 
     return ( 
         <>
@@ -33,6 +40,6 @@ const mapStateToProps = (store) => ({
     categories: store.movie.categories
 });
 
-const mapDispatchToProps = (dispatch) => bindActionCreators(MoviesActions, dispatch);
+const mapDispatchToProps = (dispatch) => bindActionCreators(MovieActions, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

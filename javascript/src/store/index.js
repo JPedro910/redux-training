@@ -1,6 +1,9 @@
-import { createStore } from "redux";
-import reducers from "./ducks/index";
+import { configureStore } from "@reduxjs/toolkit";
 
-const store = createStore(reducers);
+import movie from "./ducks/movie";
 
-export default store;
+export default configureStore({
+    reducer: {
+        movie: movie
+    }
+});
