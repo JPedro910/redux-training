@@ -1,11 +1,7 @@
-import { createActions, createReducer } from "reduxsauce"; 
+import { createAction, createReducer } from "@reduxjs/toolkit"; 
 import api from "../../services/api";
 
 const categories = api;
-
-export const { Types, Creators } = createActions({
-    selectMovie: ["category", "movie"]
-});
 
 const INITIAL_STATE = {
     categories: [...categories],
@@ -13,10 +9,14 @@ const INITIAL_STATE = {
     selectedMovie: "Título do Filme",
 }
 
+export const MoviesActions = {
+    selectMovie: createAction("movie/select", (category, movie) => ( { payload: { category, movie } } ) )
+}
+
 export default createReducer(INITIAL_STATE, {
-    [Types.SELECT_MOVIE]: (state, action) => ({
+    [MoviesActions.selectMovie.type]: (state, action) => ({
         ...state,
-        selectedCategory: action.category.name,
-        selectedMovie: action.movie.title
+        selectedCategory: action.payload.category.name,
+        selectedMovie: action.payload.movie.title
     })
 });

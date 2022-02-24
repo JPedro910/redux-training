@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { Creators as MoviesActions } from "../../store/ducks/movie";
+import { MoviesActions } from "../../store/ducks/movie";
 import { bindActionCreators } from "redux";
 
 const Sidebar = ({ categories, selectMovie }) => {
